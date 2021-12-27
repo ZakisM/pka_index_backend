@@ -11,18 +11,22 @@ tracing = "0.1"
 anyhow = "1.0"
 thiserror = "1.0"
 chrono = "0.4"
+dotenv = "0.15"
 
 [dependencies.serde]
 version = "1"
-feature = ["derive"]
 
 [dependencies.tracing-subscriber]
 version = "0.3"
 features = ["env-filter"]
 
+[dependencies.tower]
+version = "0.4"
+features = ["util", "timeout"]
+
 [dependencies.tower-http]
 version = "0.2"
-features = ["trace"]
+features = ["trace", "cors"]
 
 [dependencies.tokio]
 version = "1.15"

@@ -1,30 +1,71 @@
 use std::env;
 use std::net::SocketAddr;
+use std::sync::Arc;
+use std::time::Duration;
 
-use anyhow::Result;
+use anyhow::{anyhow, Result};
+use axum::error_handling::HandleErrorLayer;
 use axum::handler::Handler;
-use axum::http::StatusCode;
-use axum::response::{Html, IntoResponse, Response};
+use axum::http::Method;
+use axum::response::{Html, IntoResponse};
 use axum::routing::get;
-use axum::{Json, Router};
-use chrono::Utc;
-use serde::Serialize;
-use thiserror::Error;
+use axum::{AddExtensionLayer, Router};
+use sqlx::{Pool, Sqlite};
+use tower::{BoxError, ServiceBuilder};
+use tower_http::cors::{CorsLayer, Origin};
 use tower_http::trace::TraceLayer;
 use tracing::info;
 
+use crate::error::ApiError;
+use crate::setup::setup_database;
+
+type Db = Arc<Pool<Sqlite>>;
+
+mod error;
+mod handler;
+mod setup;
+
 #[tokio::main]
 async fn main() -> Result<()> {
+    dotenv::dotenv()?;
+
     if env::var_os("RUST_LOG").is_none() {
-        env::set_var("RUST_LOG", "pka_index_backend=trace,tower_http=trace");
+        env::set_var("RUST_LOG", "pka_index_backend=info,tower_http=info");
     }
 
     tracing_subscriber::fmt::init();
 
+    let database = setup_database().await?;
+
     let app = Router::new()
         .route("/", get(handler))
         .fallback(handler_404.into_service())
-        .layer(TraceLayer::new_for_http());
+        .layer(
+            ServiceBuilder::new()
+                .layer(
+                    CorsLayer::new()
+                        .allow_origin(Origin::exact(
+                            "http://0.0.0.0:5678"
+                                .parse()
+                                .expect("Failed to parse local origin."),
+                        ))
+                        .allow_methods(vec![Method::GET, Method::POST]),
+                )
+                .layer(HandleErrorLayer::new(|error: BoxError| async move {
+                    let result: Result<ApiError, _> =
+                        if error.is::<tower::timeout::error::Elapsed>() {
+                            Err(ApiError::Timeout)
+                        } else {
+                            Err(ApiError::InternalError(anyhow!(error)))
+                        };
+
+                    result
+                }))
+                .layer(TraceLayer::new_for_http())
+                .layer(AddExtensionLayer::new(database))
+                .timeout(Duration::from_secs(10))
+                .into_inner(),
+        );
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 1234));
 
@@ -40,57 +81,6 @@ async fn main() -> Result<()> {
 
 async fn handler() -> Html<&'static str> {
     Html("<h1>Hello World!</h1>")
-}
-
-#[derive(Error, Debug, Serialize)]
-enum ApiError {
-    #[error("This route was not found")]
-    NotFound,
-}
-
-#[derive(Debug, Serialize)]
-struct UserError<'a> {
-    timestamp: String,
-    status: u16,
-    error: &'a str,
-    message: String,
-}
-
-impl<'a> UserError<'a> {
-    pub fn new<S: AsRef<str>>(
-        status_code: StatusCode,
-        custom_error: Option<&'a str>,
-        message: S,
-    ) -> Self {
-        let status = status_code.as_u16();
-
-        let error = if let Some(error) = custom_error {
-            error
-        } else {
-            status_code.canonical_reason().unwrap_or("Unknown error")
-        };
-
-        let timestamp = Utc::now().to_rfc3339();
-
-        let message = message.as_ref().to_owned();
-
-        UserError {
-            timestamp,
-            status,
-            error,
-            message,
-        }
-    }
-}
-
-impl IntoResponse for ApiError {
-    fn into_response(self) -> Response {
-        let error = match self {
-            ApiError::NotFound => UserError::new(StatusCode::NOT_FOUND, None, self.to_string()),
-        };
-
-        Json(error).into_response()
-    }
 }
 
 async fn handler_404() -> impl IntoResponse {
