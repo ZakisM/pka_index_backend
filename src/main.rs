@@ -7,8 +7,7 @@ use anyhow::{anyhow, Result};
 use axum::error_handling::HandleErrorLayer;
 use axum::handler::Handler;
 use axum::http::Method;
-use axum::response::{Html, IntoResponse};
-use axum::routing::get;
+use axum::response::IntoResponse;
 use axum::{AddExtensionLayer, Router};
 use sqlx::{Pool, Sqlite};
 use tower::{BoxError, ServiceBuilder};
@@ -17,6 +16,7 @@ use tower_http::trace::TraceLayer;
 use tracing::info;
 
 use crate::error::ApiError;
+use crate::handler::episode::{episode_routes, EPISODE_ENDPOINT};
 use crate::setup::setup_database;
 
 type Db = Arc<Pool<Sqlite>>;
@@ -24,6 +24,8 @@ type Db = Arc<Pool<Sqlite>>;
 mod error;
 mod handler;
 mod setup;
+
+const API_ENDPOINT: &str = "/v1/api";
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -37,9 +39,8 @@ async fn main() -> Result<()> {
 
     let database = setup_database().await?;
 
-    let app = Router::new()
-        .route("/", get(handler))
-        .fallback(handler_404.into_service())
+    let main_router = Router::new()
+        .nest(EPISODE_ENDPOINT, episode_routes())
         .layer(
             ServiceBuilder::new()
                 .layer(
@@ -67,6 +68,10 @@ async fn main() -> Result<()> {
                 .into_inner(),
         );
 
+    let app = Router::new()
+        .nest(API_ENDPOINT, main_router)
+        .fallback(handler_404.into_service());
+
     let addr = SocketAddr::from(([0, 0, 0, 0], 1234));
 
     info!("Server started at: {}", addr);
@@ -77,10 +82,6 @@ async fn main() -> Result<()> {
         .expect("Failed to start server.");
 
     Ok(())
-}
-
-async fn handler() -> Html<&'static str> {
-    Html("<h1>Hello World!</h1>")
 }
 
 async fn handler_404() -> impl IntoResponse {

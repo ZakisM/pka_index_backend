@@ -4,31 +4,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64839771-12f2-4f84-914f-18af86531694" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.cargo/config.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Check.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_release.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pka_db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pka_db.sqlite3-shm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pka_db.sqlite3-wal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20211227201044_pka_episode.down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20211227201044_pka_episode.up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20211227201347_pka_event.down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20211227201347_pka_event.up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20211227201353_pka_youtube_details.down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20211227201353_pka_youtube_details.up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/error.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handler/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/setup.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+    <list default="true" id="64839771-12f2-4f84-914f-18af86531694" name="Changes" comment="WIP">
+      <change afterPath="$PROJECT_DIR$/src/handler/episode.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handler/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +57,7 @@
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Cargo.Check">
+  <component name="RunManager" selected="Cargo.Run">
     <list>
       <item itemvalue="Cargo.Check" />
       <item itemvalue="Cargo.Run" />
@@ -99,8 +77,16 @@
       <option name="presentableId" value="Default" />
       <updated>1640634037639</updated>
       <workItem from="1640634040230" duration="1680000" />
-      <workItem from="1640635763806" duration="6062000" />
+      <workItem from="1640635763806" duration="6399000" />
     </task>
+    <task id="LOCAL-00001" summary="WIP">
+      <created>1640641878500</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640641878500</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +102,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="WIP" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
