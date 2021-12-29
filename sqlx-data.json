@@ -1,5 +1,41 @@
 {
   "db": "SQLite",
+  "01549d5e5fc22e160f8de4cccff1e481c6d1c3e1f4b783168c671938fb9dfdf2": {
+    "query": "SELECT * FROM pka_youtube_details WHERE episode_number = ?",
+    "describe": {
+      "columns": [
+        {
+          "name": "video_id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "episode_number",
+          "ordinal": 1,
+          "type_info": "Float"
+        },
+        {
+          "name": "title",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "length_seconds",
+          "ordinal": 3,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 1
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
   "a9d48c2436da653c6e6f040bb73e84e00cce33ad027914772c86be0f18a25e72": {
     "query": "SELECT * FROM pka_episode WHERE number = ?",
     "describe": {
@@ -29,6 +65,54 @@
         "Right": 1
       },
       "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "b8bb85b9984942dcf2b085d5676f9ecb0f7e0d383b5ae7fa656c983b94a58c47": {
+    "query": "SELECT * FROM pka_event WHERE episode_number = ? ORDER BY timestamp ASC",
+    "describe": {
+      "columns": [
+        {
+          "name": "event_id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "episode_number",
+          "ordinal": 1,
+          "type_info": "Float"
+        },
+        {
+          "name": "timestamp",
+          "ordinal": 2,
+          "type_info": "Int64"
+        },
+        {
+          "name": "description",
+          "ordinal": 3,
+          "type_info": "Text"
+        },
+        {
+          "name": "length_seconds",
+          "ordinal": 4,
+          "type_info": "Int64"
+        },
+        {
+          "name": "upload_date",
+          "ordinal": 5,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 1
+      },
+      "nullable": [
+        false,
+        false,
         false,
         false,
         false,
