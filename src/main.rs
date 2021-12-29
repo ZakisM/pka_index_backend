@@ -21,6 +21,7 @@ use crate::setup::setup_database;
 
 type Db = Arc<Pool<Sqlite>>;
 
+mod conduit;
 mod error;
 mod handler;
 mod models;
