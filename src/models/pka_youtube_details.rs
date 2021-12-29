@@ -1,5 +1,7 @@
 use serde::Serialize;
 
+use crate::models::sqlx_types::SqliteI32;
+
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PkaYoutubeDetails {
@@ -7,7 +9,7 @@ pub struct PkaYoutubeDetails {
     #[serde(skip_serializing)]
     pub episode_number: f32,
     pub title: String,
-    pub length_seconds: i32,
+    pub length_seconds: SqliteI32,
 }
 
 impl PkaYoutubeDetails {
@@ -16,7 +18,7 @@ impl PkaYoutubeDetails {
             video_id,
             episode_number,
             title,
-            length_seconds,
+            length_seconds: SqliteI32(length_seconds),
         }
     }
 }

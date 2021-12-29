@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64839771-12f2-4f84-914f-18af86531694" name="Changes" comment="WIP">
-      <change afterPath="$PROJECT_DIR$/src/conduit/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/conduit/pka_episode.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/sqlx_types.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/conduit/pka_episode.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/conduit/pka_episode.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handler/episode.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/episode.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/pka_event.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/pka_event.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/pka_youtube_details.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/pka_youtube_details.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="SQL" />
     <property name="database.data.extractors.current.export.id" value="SQL Inserts" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="go.format.on.save.advertiser.fired" value="true" />
@@ -65,7 +66,12 @@
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Cargo.Run release">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sqlx_queries/pka_episode" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Cargo.Check">
     <list>
       <item itemvalue="Cargo.Check" />
       <item itemvalue="Cargo.Run" />

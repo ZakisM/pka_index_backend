@@ -1,41 +1,5 @@
 {
   "db": "SQLite",
-  "01549d5e5fc22e160f8de4cccff1e481c6d1c3e1f4b783168c671938fb9dfdf2": {
-    "query": "SELECT * FROM pka_youtube_details WHERE episode_number = ?",
-    "describe": {
-      "columns": [
-        {
-          "name": "video_id",
-          "ordinal": 0,
-          "type_info": "Text"
-        },
-        {
-          "name": "episode_number",
-          "ordinal": 1,
-          "type_info": "Float"
-        },
-        {
-          "name": "title",
-          "ordinal": 2,
-          "type_info": "Text"
-        },
-        {
-          "name": "length_seconds",
-          "ordinal": 3,
-          "type_info": "Int64"
-        }
-      ],
-      "parameters": {
-        "Right": 1
-      },
-      "nullable": [
-        false,
-        false,
-        false,
-        false
-      ]
-    }
-  },
   "0b0d5aa218f6f863875d8f6c906ed676839ca878b27332f18cf75e589896b0f0": {
     "query": "SELECT (youtube_link) FROM pka_episode WHERE number = ?",
     "describe": {
@@ -50,6 +14,72 @@
         "Right": 1
       },
       "nullable": [
+        false
+      ]
+    }
+  },
+  "80f03ad41d05dd02f75b2c2c51ab671350e92cd6d76efad29f07acc95c866394": {
+    "query": "SELECT (number) FROM pka_episode ORDER BY number DESC",
+    "describe": {
+      "columns": [
+        {
+          "name": "number",
+          "ordinal": 0,
+          "type_info": "Float"
+        }
+      ],
+      "parameters": {
+        "Right": 0
+      },
+      "nullable": [
+        false
+      ]
+    }
+  },
+  "a6169bd0edd11a0a703f6615ff433ab63f751faefe61bf4d3b38ec0823ba1d76": {
+    "query": "SELECT event_id, episode_number, description, upload_date,\n        timestamp as \"timestamp: _\",\n        length_seconds as \"length_seconds: _\"\n        FROM pka_event WHERE episode_number = ? ORDER BY timestamp ASC",
+    "describe": {
+      "columns": [
+        {
+          "name": "event_id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "episode_number",
+          "ordinal": 1,
+          "type_info": "Float"
+        },
+        {
+          "name": "description",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "upload_date",
+          "ordinal": 3,
+          "type_info": "Int64"
+        },
+        {
+          "name": "timestamp: _",
+          "ordinal": 4,
+          "type_info": "Int64"
+        },
+        {
+          "name": "length_seconds: _",
+          "ordinal": 5,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 1
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
         false
       ]
     }
@@ -90,12 +120,12 @@
       ]
     }
   },
-  "b8bb85b9984942dcf2b085d5676f9ecb0f7e0d383b5ae7fa656c983b94a58c47": {
-    "query": "SELECT * FROM pka_event WHERE episode_number = ? ORDER BY timestamp ASC",
+  "f0cd3c0ddc41dd2e68a3e08fbadc87821810cfeda0696e8a58d195afa1071310": {
+    "query": "SELECT video_id, episode_number, title,\n        length_seconds as \"length_seconds: _\"\n        FROM pka_youtube_details WHERE episode_number = ?",
     "describe": {
       "columns": [
         {
-          "name": "event_id",
+          "name": "video_id",
           "ordinal": 0,
           "type_info": "Text"
         },
@@ -105,23 +135,13 @@
           "type_info": "Float"
         },
         {
-          "name": "timestamp",
+          "name": "title",
           "ordinal": 2,
-          "type_info": "Int64"
-        },
-        {
-          "name": "description",
-          "ordinal": 3,
           "type_info": "Text"
         },
         {
-          "name": "length_seconds",
-          "ordinal": 4,
-          "type_info": "Int64"
-        },
-        {
-          "name": "upload_date",
-          "ordinal": 5,
+          "name": "length_seconds: _",
+          "ordinal": 3,
           "type_info": "Int64"
         }
       ],
@@ -129,8 +149,6 @@
         "Right": 1
       },
       "nullable": [
-        false,
-        false,
         false,
         false,
         false,

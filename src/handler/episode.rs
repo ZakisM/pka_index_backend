@@ -57,12 +57,7 @@ async fn youtube_link(
     CustomPath(number): CustomPath<f32>,
     Extension(db): Extension<Db>,
 ) -> Result<JsonResponse<String>, ApiError> {
-    let episode = sqlx::query!(
-        "SELECT (youtube_link) FROM pka_episode WHERE number = ?",
-        number
-    )
-    .fetch_one(&*db)
-    .await?;
+    let res = conduit::pka_episode::youtube_link(&db, number).await?;
 
-    Ok(JsonResponse::success(episode.youtube_link))
+    Ok(JsonResponse::success(res))
 }

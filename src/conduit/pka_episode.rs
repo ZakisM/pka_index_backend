@@ -15,19 +15,22 @@ pub async fn find_with_all(db: &Db, number: f32) -> Result<PkaEpisodeWithAll, Ap
     .fetch_one(&**db)
     .await?;
 
-    // Using unchecked as i32 not being recognized as correct type.
-    let youtube_details = sqlx::query_as_unchecked!(
+    let youtube_details = sqlx::query_as!(
         PkaYoutubeDetails,
-        "SELECT * FROM pka_youtube_details WHERE episode_number = ?",
+        r#"SELECT video_id, episode_number, title,
+        length_seconds as "length_seconds: _"
+        FROM pka_youtube_details WHERE episode_number = ?"#,
         number,
     )
     .fetch_one(&**db)
     .await?;
 
-    // Using unchecked as i32 not being recognized as correct type.
-    let events = sqlx::query_as_unchecked!(
+    let events = sqlx::query_as!(
         PkaEvent,
-        "SELECT * FROM pka_event WHERE episode_number = ? ORDER BY timestamp ASC",
+        r#"SELECT event_id, episode_number, description, upload_date,
+        timestamp as "timestamp: _",
+        length_seconds as "length_seconds: _"
+        FROM pka_event WHERE episode_number = ? ORDER BY timestamp ASC"#,
         number,
     )
     .fetch_all(&**db)
@@ -58,4 +61,15 @@ pub async fn random_number(db: &Db) -> Result<f32, ApiError> {
     };
 
     Ok(res)
+}
+
+pub async fn youtube_link(db: &Db, number: f32) -> Result<String, ApiError> {
+    let episode = sqlx::query!(
+        "SELECT (youtube_link) FROM pka_episode WHERE number = ?",
+        number
+    )
+    .fetch_one(&**db)
+    .await?;
+
+    Ok(episode.youtube_link)
 }
