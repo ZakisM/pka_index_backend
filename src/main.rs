@@ -23,6 +23,7 @@ type Db = Arc<Pool<Sqlite>>;
 
 mod error;
 mod handler;
+mod models;
 mod setup;
 
 const API_ENDPOINT: &str = "/v1/api";
@@ -39,8 +40,11 @@ async fn main() -> Result<()> {
 
     let database = setup_database().await?;
 
-    let main_router = Router::new()
-        .nest(EPISODE_ENDPOINT, episode_routes())
+    let main_router = Router::new().nest(EPISODE_ENDPOINT, episode_routes());
+
+    let app = Router::new()
+        .nest(API_ENDPOINT, main_router)
+        .fallback(handler_404.into_service())
         .layer(
             ServiceBuilder::new()
                 .layer(
@@ -55,9 +59,9 @@ async fn main() -> Result<()> {
                 .layer(HandleErrorLayer::new(|error: BoxError| async move {
                     let result: Result<ApiError, _> =
                         if error.is::<tower::timeout::error::Elapsed>() {
-                            Err(ApiError::Timeout)
+                            Err(ApiError::RequestTimeout)
                         } else {
-                            Err(ApiError::InternalError(anyhow!(error)))
+                            Err(ApiError::InternalServerError(anyhow!(error)))
                         };
 
                     result
@@ -67,10 +71,6 @@ async fn main() -> Result<()> {
                 .timeout(Duration::from_secs(10))
                 .into_inner(),
         );
-
-    let app = Router::new()
-        .nest(API_ENDPOINT, main_router)
-        .fallback(handler_404.into_service());
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 1234));
 
@@ -85,5 +85,5 @@ async fn main() -> Result<()> {
 }
 
 async fn handler_404() -> impl IntoResponse {
-    ApiError::NotFound
+    ApiError::RouteNotFound
 }

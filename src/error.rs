@@ -1,3 +1,4 @@
+use axum::extract::rejection::PathRejection;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use axum::Json;
@@ -9,25 +10,29 @@ use tracing::error;
 #[derive(Error, Debug)]
 pub enum ApiError {
     #[error("This route was not found.")]
-    NotFound,
+    RouteNotFound,
     #[error("Your request timed out.")]
-    Timeout,
+    RequestTimeout,
     #[error("An internal error has occurred.")]
-    InternalError(anyhow::Error),
+    InternalServerError(anyhow::Error),
+    #[error("A database error occurred.")]
+    DatabaseError(sqlx::Error),
+    #[error("This path is invalid.")]
+    PathRejection(axum::extract::rejection::PathRejection),
 }
 
 #[derive(Debug, Serialize)]
-struct UserError<'a> {
+pub struct UserError {
     timestamp: String,
     status: u16,
-    error: &'a str,
+    error: &'static str,
     message: String,
 }
 
-impl<'a> UserError<'a> {
+impl UserError {
     pub fn new<S: AsRef<str>>(
         status_code: StatusCode,
-        custom_error: Option<&'a str>,
+        custom_error: Option<&'static str>,
         message: S,
     ) -> Self {
         let status = status_code.as_u16();
@@ -35,7 +40,7 @@ impl<'a> UserError<'a> {
         let error = if let Some(error) = custom_error {
             error
         } else {
-            status_code.canonical_reason().unwrap_or("Unknown error")
+            status_code.canonical_reason().unwrap_or("Unknown Error")
         };
 
         let timestamp = Utc::now().to_rfc3339();
@@ -54,25 +59,65 @@ impl<'a> UserError<'a> {
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
         let (status, error) = match self {
-            ApiError::NotFound => {
+            ApiError::RouteNotFound => {
                 let status = StatusCode::NOT_FOUND;
 
                 (status, UserError::new(status, None, self.to_string()))
             }
-            ApiError::Timeout => {
+            ApiError::RequestTimeout => {
                 let status = StatusCode::REQUEST_TIMEOUT;
 
                 (status, UserError::new(status, None, self.to_string()))
             }
-            ApiError::InternalError(ref e) => {
+            ApiError::InternalServerError(ref e) => {
                 error!("{}", e);
 
                 let status = StatusCode::INTERNAL_SERVER_ERROR;
 
                 (status, UserError::new(status, None, self.to_string()))
             }
+            ApiError::DatabaseError(ref e) => match e {
+                sqlx::Error::RowNotFound => {
+                    let status = StatusCode::NOT_FOUND;
+
+                    (
+                        status,
+                        UserError::new(status, None, "This data was not found in the database."),
+                    )
+                }
+                _ => {
+                    let status = StatusCode::INTERNAL_SERVER_ERROR;
+
+                    (status, UserError::new(status, None, self.to_string()))
+                }
+            },
+            ApiError::PathRejection(e) => {
+                let message = e.to_string();
+
+                let status = match e {
+                    PathRejection::FailedToDeserializePathParams(inner) => {
+                        let kind = inner.into_kind();
+
+                        match &kind {
+                            axum::extract::path::ErrorKind::UnsupportedType { .. } => {
+                                StatusCode::INTERNAL_SERVER_ERROR
+                            }
+                            _ => StatusCode::BAD_REQUEST,
+                        }
+                    }
+                    _ => StatusCode::INTERNAL_SERVER_ERROR,
+                };
+
+                (status, UserError::new(status, None, message))
+            }
         };
 
         (status, Json(error)).into_response()
+    }
+}
+
+impl From<sqlx::Error> for ApiError {
+    fn from(sqlx_err: sqlx::Error) -> Self {
+        Self::DatabaseError(sqlx_err)
     }
 }

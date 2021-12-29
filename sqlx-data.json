@@ -1,3 +1,39 @@
 {
-  "db": "SQLite"
+  "db": "SQLite",
+  "a9d48c2436da653c6e6f040bb73e84e00cce33ad027914772c86be0f18a25e72": {
+    "query": "SELECT * FROM pka_episode WHERE number = ?",
+    "describe": {
+      "columns": [
+        {
+          "name": "number",
+          "ordinal": 0,
+          "type_info": "Float"
+        },
+        {
+          "name": "name",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "youtube_link",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "upload_date",
+          "ordinal": 3,
+          "type_info": "Int64"
+        }
+      ],
+      "parameters": {
+        "Right": 1
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  }
 }

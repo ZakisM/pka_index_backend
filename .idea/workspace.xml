@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64839771-12f2-4f84-914f-18af86531694" name="Changes" comment="WIP">
-      <change afterPath="$PROJECT_DIR$/src/handler/episode.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handler/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/custom_path.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/pka_episode.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/pka_episode_with_all.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/pka_event.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/pka_youtube_details.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pka_db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/data/pka_db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pka_db.sqlite3-shm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pka_db.sqlite3-wal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlx-data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/error.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/error.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handler/episode.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/episode.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,14 +63,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.data.extractors.current.export.id" value="SQL Inserts" />
+    <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="go.format.on.save.advertiser.fired" value="true" />
     <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="import_schema_mapping" value="&lt;schema-mapping&gt;&lt;databases&gt;&lt;list&gt;&lt;schema-mapping-item&gt;&lt;source-data-source-id&gt;cff3d7f4-5342-4133-8442-a35cce7786da&lt;/source-data-source-id&gt;&lt;source-path&gt;schema/&quot;main&quot;&lt;/source-path&gt;&lt;target-data-source-id&gt;cff3d7f4-5342-4133-8442-a35cce7786da&lt;/target-data-source-id&gt;&lt;target-path&gt;schema/&quot;main&quot;&lt;/target-path&gt;&lt;/schema-mapping-item&gt;&lt;/list&gt;&lt;/databases&gt;&lt;/schema-mapping&gt;" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pka_site_backend/main_pka_event.csv" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Cargo.Run">
+  <component name="RunManager" selected="Cargo.Check">
     <list>
       <item itemvalue="Cargo.Check" />
       <item itemvalue="Cargo.Run" />
@@ -78,6 +95,12 @@
       <updated>1640634037639</updated>
       <workItem from="1640634040230" duration="1680000" />
       <workItem from="1640635763806" duration="6399000" />
+      <workItem from="1640716146951" duration="2574000" />
+      <workItem from="1640721953959" duration="3199000" />
+      <workItem from="1640726089488" duration="321000" />
+      <workItem from="1640787557353" duration="306000" />
+      <workItem from="1640790342228" duration="232000" />
+      <workItem from="1640790884233" duration="3068000" />
     </task>
     <task id="LOCAL-00001" summary="WIP">
       <created>1640641878500</created>

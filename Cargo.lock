@@ -726,10 +726,12 @@ name = "pka_index_backend"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "async-trait",
  "axum",
  "chrono",
  "dotenv",
  "serde",
+ "serde_json",
  "sqlx",
  "thiserror",
  "tokio",
