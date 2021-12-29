@@ -14,10 +14,12 @@ use crate::Db;
 pub const EPISODE_ENDPOINT: &str = "/episode";
 
 pub fn episode_routes() -> Router {
-    Router::new().route("/watch/:number", get(watch_pka_episode))
+    Router::new()
+        .route("/watch/:number", get(watch))
+        .route("/youtube_link/:number", get(youtube_link))
 }
 
-async fn watch_pka_episode(
+async fn watch(
     CustomPath(number): CustomPath<f32>,
     Extension(db): Extension<Db>,
 ) -> Result<JsonResponse<PkaEpisodeWithAll>, ApiError> {
@@ -50,4 +52,18 @@ async fn watch_pka_episode(
     let res = PkaEpisodeWithAll::new(episode, youtube_details, events);
 
     Ok(JsonResponse::success(res))
+}
+
+async fn youtube_link(
+    CustomPath(number): CustomPath<f32>,
+    Extension(db): Extension<Db>,
+) -> Result<JsonResponse<String>, ApiError> {
+    let episode = sqlx::query!(
+        "SELECT (youtube_link) FROM pka_episode WHERE number = ?",
+        number
+    )
+    .fetch_one(&*db)
+    .await?;
+
+    Ok(JsonResponse::success(episode.youtube_link))
 }

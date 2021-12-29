@@ -36,6 +36,24 @@
       ]
     }
   },
+  "0b0d5aa218f6f863875d8f6c906ed676839ca878b27332f18cf75e589896b0f0": {
+    "query": "SELECT (youtube_link) FROM pka_episode WHERE number = ?",
+    "describe": {
+      "columns": [
+        {
+          "name": "youtube_link",
+          "ordinal": 0,
+          "type_info": "Text"
+        }
+      ],
+      "parameters": {
+        "Right": 1
+      },
+      "nullable": [
+        false
+      ]
+    }
+  },
   "a9d48c2436da653c6e6f040bb73e84e00cce33ad027914772c86be0f18a25e72": {
     "query": "SELECT * FROM pka_episode WHERE number = ?",
     "describe": {

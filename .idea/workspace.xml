@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64839771-12f2-4f84-914f-18af86531694" name="Changes" comment="WIP">
-      <change afterPath="$PROJECT_DIR$/src/models/custom_path.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/pka_episode.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/pka_episode_with_all.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/pka_event.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/pka_youtube_details.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pka_db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/data/pka_db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pka_db.sqlite3-shm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pka_db.sqlite3-wal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqlx-data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/error.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/error.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handler/episode.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/episode.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +60,7 @@
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Cargo.Check">
+  <component name="RunManager" selected="Cargo.Run release">
     <list>
       <item itemvalue="Cargo.Check" />
       <item itemvalue="Cargo.Run" />
@@ -100,7 +86,7 @@
       <workItem from="1640726089488" duration="321000" />
       <workItem from="1640787557353" duration="306000" />
       <workItem from="1640790342228" duration="232000" />
-      <workItem from="1640790884233" duration="3068000" />
+      <workItem from="1640790884233" duration="4633000" />
     </task>
     <task id="LOCAL-00001" summary="WIP">
       <created>1640641878500</created>
@@ -109,7 +95,21 @@
       <option name="project" value="LOCAL" />
       <updated>1640641878500</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="WIP">
+      <created>1640794110330</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640794110330</updated>
+    </task>
+    <task id="LOCAL-00003" summary="WIP">
+      <created>1640794148447</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640794148447</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
